@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyWebAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace SpotifyPractice
         public MainWindow()
         {
             InitializeComponent();
+            
+            this.Test.Text = "Hello";
+
+
+        }
+
+        
+
+        private void Click_Button(object sender,RoutedEventArgs arg)
+        {
+            var viewmodel = new TestViewModel();
+            var view = new testwindow(viewmodel);
+            view.ShowDialog();
         }
     }
 }
