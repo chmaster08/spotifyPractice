@@ -1,9 +1,6 @@
 ﻿using Prism.Commands;
-using SpotifyWebAPI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -12,9 +9,12 @@ namespace SpotifyPractice
     public class TestViewModel :Prism.Mvvm.BindableBase
     {
         private string _req;
+        private static HttpClient client = new HttpClient();
+
         public TestViewModel()
         {
             GetCommand = new DelegateCommand(SetValue);
+            client.Timeout = TimeSpan.FromMilliseconds(3000);
             _req = "Nodata";
         }
 
@@ -27,31 +27,26 @@ namespace SpotifyPractice
         public ICommand GetCommand { get;}
         private async Task<string> TestAsync()
         {
-            var token = new AuthenticationToken()
+            string ret=string.Empty;
+            try
             {
-                AccessToken = "9cb526d767d249498e528ff995f7f20d",
-                ExpiresOn = DateTime.Now.AddSeconds(3600),
-                RefreshToken = "862fea0d84c94ccb9b2a9ce794dd328b",
-                TokenType = "Bearer"
-            };
-            //var output = await SpotifyWebAPI.Track.Search("Ties that bind", "Blackbird", "Alter Bridge");
-
-            //Console.WriteLine(output.Items[0].Name);
-            var usr = await SpotifyWebAPI.User.GetCurrentUserProfile(token);
-            var playlist = await usr.GetPlaylists(token);
-            return playlist.ToString();
-            //return output.Items[0].Name ;
+                var result = await client.GetAsync(@"http://www.google.com");
+                ret = result.StatusCode.ToString();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+                
+            return ret;
         }
+
 
         private void SetValue()
         {
             var task = TestAsync();
-            while(!task.IsCompleted)
-            {
-                task.Wait(3600);
-
-            }
-            _req = task.Result;
+            task.Wait();
+            Response = task.Result;
         }
 
     }

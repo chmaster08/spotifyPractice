@@ -57,3 +57,4 @@ C:\Users\chmaster\Documents\workplace\spotifyPractice\SpotifyPractice\obj\Debug\
 C:\Users\chmaster\Documents\workplace\spotifyPractice\SpotifyPractice\obj\Debug\SpotifyPractice.csproj.CopyComplete
 C:\Users\chmaster\Documents\workplace\spotifyPractice\SpotifyPractice\obj\Debug\SpotifyPractice.exe
 C:\Users\chmaster\Documents\workplace\spotifyPractice\SpotifyPractice\obj\Debug\SpotifyPractice.pdb
+C:\Users\chmaster\Documents\workplace\spotifyPractice\SpotifyPractice\obj\Debug\SpotifyPractice.csprojAssemblyReference.cache
